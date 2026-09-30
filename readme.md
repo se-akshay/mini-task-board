@@ -58,13 +58,15 @@ Express.js Backend
        | SQL Queries
        v
 MySQL Database
+```
 
 ## Environment Variables
+
 Create `.env` files for both backend and frontend.
 
 Backend `backend/.env`:
-```
 
+```env
 PORT=4000
 
 DB_HOST=localhost
@@ -74,36 +76,30 @@ DB_PASSWORD=your_mysql_password
 DB_NAME=mini_task_board
 
 FRONTEND_URL=http://localhost:3000
-
 ```
 
 Frontned `frontend/.env.local`:
-```
 
+```env
 NEXT_PUBLIC_API_URL=http://localhost:4000
-
 ```
-
 
 ## Installation & Running (Local)
-```
 
-Bakcend
+### Bakcend
 
-```
+```bash
 cd backend
 npm run build
 npm start
-
 ```
 
-Frontend
+### Frontend
 
-```
+```bash
 cd frontend
 npm run build
 npm start
-
 ```
 
 ## Database Setup
@@ -112,15 +108,18 @@ Make sure MySQL is installed and running.
 
 Open MySQL:
 
-````bash
+```bash
 mysql -u root -p
+```
 
 Create the database and tables by running the schema file:
-```bash
+
+```sql
 source C:/path/to/mini-task-board/database/schema.sql;
+```
 
 After creating the database, seed the initial sample tasks using:
-```bash
-source C:/path/to/mini-task-board/database/seed.sql;
 
-````
+```sql
+source C:/path/to/mini-task-board/database/seed.sql;
+```
