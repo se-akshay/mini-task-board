@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import taskRoutes from "./routes/task.routes.js";
 
 dotenv.config();
 
@@ -20,5 +21,7 @@ app.get("/health", (_req, res) => {
     message: "API is running",
   });
 });
+
+app.use("/api/tasks", taskRoutes);
 
 export default app;
