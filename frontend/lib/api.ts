@@ -1,16 +1,20 @@
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+
+export interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+}
 
 export async function apiRequest<T>(
   endpoint: string,
-  options?: RequestInit
+  options?: RequestInit,
 ): Promise<T> {
   const response = await fetch(`${API_URL}${endpoint}`, {
     ...options,
     headers: {
       "Content-Type": "application/json",
-      ...(options?.headers || {})
-    }
+      ...(options?.headers || {}),
+    },
   });
 
   const data = await response.json();
