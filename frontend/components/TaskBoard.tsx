@@ -9,30 +9,38 @@ const columns: {
 }[] = [
   {
     status: "todo",
-    title: "Todo"
+    title: "Todo",
   },
   {
     status: "in-progress",
-    title: "In Progress"
+    title: "In Progress",
   },
   {
     status: "done",
-    title: "Done"
-  }
+    title: "Done",
+  },
 ];
 
 interface TaskBoardProps {
   tasks: Task[];
   loading: boolean;
   error: string;
+  updatingTaskId: number | null;
+  deletingTaskId: number | null;
   onRetry: () => void;
+  onStatusChange: (taskId: number, status: TaskStatus) => void;
+  onDelete: (taskId: number) => void;
 }
 
 export default function TaskBoard({
   tasks,
   loading,
   error,
-  onRetry
+  updatingTaskId,
+  deletingTaskId,
+  onRetry,
+  onStatusChange,
+  onDelete,
 }: TaskBoardProps) {
   if (loading) {
     return (
@@ -62,18 +70,13 @@ export default function TaskBoard({
     <div className="grid gap-6 md:grid-cols-3">
       {columns.map((column) => {
         const columnTasks = tasks.filter(
-          (task) => task.status === column.status
+          (task) => task.status === column.status,
         );
 
         return (
-          <section
-            key={column.status}
-            className="rounded-xl bg-gray-100 p-4"
-          >
+          <section key={column.status} className="rounded-xl bg-gray-100 p-4">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-semibold text-gray-900">
-                {column.title}
-              </h2>
+              <h2 className="font-semibold text-gray-900">{column.title}</h2>
 
               <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-gray-600">
                 {columnTasks.length}
@@ -87,7 +90,12 @@ export default function TaskBoard({
                 </div>
               ) : (
                 columnTasks.map((task) => (
-                  <TaskItem key={task.id} task={task} />
+                  <TaskItem  key={task.id}
+                    task={task}
+                    updating={updatingTaskId === task.id}
+                    deleting={deletingTaskId === task.id}
+                    onStatusChange={onStatusChange}
+                    onDelete={onDelete} />
                 ))
               )}
             </div>

@@ -75,7 +75,7 @@ export default function AddTaskForm({
           onChange={(event) => setTitle(event.target.value)}
           placeholder="What needs to be done?"
           disabled={loading}
-          className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-gray-500 disabled:bg-gray-100"
+          className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none placeholder:text-gray-400 focus:border-gray-500 disabled:bg-gray-100 disabled:text-gray-500"
         />
 
         <select
@@ -84,7 +84,7 @@ export default function AddTaskForm({
             setStatus(event.target.value as TaskStatus)
           }
           disabled={loading}
-          className="rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none disabled:bg-gray-100"
+          className="rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900  outline-none disabled:bg-gray-100"
         >
           <option value="todo">Todo</option>
           <option value="in-progress">In Progress</option>
